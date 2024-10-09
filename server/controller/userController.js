@@ -11,7 +11,6 @@ export const handleRegistration = (req,res)=>{
         if(existingUser){
           return res.status(403).json({error: "Email already exists"})
         }
-
         bcrypt.hash(password,10)
               .then((hashPassword)=>{
                   UserModel.create({username,email,password: hashPassword})
@@ -34,7 +33,6 @@ export const handleRegistration = (req,res)=>{
                 res.status(500).json({error:"3Error handling in servers"})
         })
 }
-
 
 export const handleLogin =(req,res)=>{
     const {email,password} =req.body
@@ -67,7 +65,7 @@ export const authChecking =(req,res)=>{
   if(req.session.userId){
     res.status(200).json({authenticated: true})
   }else{
-    res.status(200).json({authenticated: false})
+    res.status(400).json({authenticated: false})
   }
   }
 
@@ -86,9 +84,7 @@ export const authChecking =(req,res)=>{
                 .catch((error)=>{
                   res.status(500).json({error:'internal server error'})
                 })
-
   }
-
 
 export const handleLogout = (req,res) =>{
   req.session.destroy((err)=>{
@@ -99,6 +95,5 @@ export const handleLogout = (req,res) =>{
       else{
         res.status(200).json({message:"logout success"})
       }
-  
 })
 }

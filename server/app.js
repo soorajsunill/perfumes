@@ -20,6 +20,7 @@ const corsOptions = {
       credentials: true,
       allowedHeader: "Content-Type, Authorization"
 }
+app.enable('trust proxy')
 app.use(cors(corsOptions))
 app.use(express.static("public"))
 app.use(fileUpload())
