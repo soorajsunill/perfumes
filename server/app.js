@@ -15,11 +15,10 @@ const app =express()
 const PORT =process.env.PORT
 const MONGODB_URI = process.env.MONGODB_URI;
 const corsOptions = {
-      origin:"http://localhost:5173",
+      origin:"https://perfumes-eta-seven.vercel.app",
       method: "GET,POST,HEAD,PUT,PATCH,DELETE",
       credentials: true,
       allowedHeader: "Content-Type, Authorization"
-
 }
 app.use(cors(corsOptions))
 app.use(express.static("public"))
@@ -31,7 +30,7 @@ app.use(session({
           secret: "secret",
           resave: false,
           saveUninitialized:true,
-          cookie: {secure: false}
+          cookie: {secure: true}
 }))
 
 // app.options('*', cors())
